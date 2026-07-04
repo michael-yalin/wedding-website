@@ -52,15 +52,6 @@ header{
     overflow: hidden;
 }
 
-.hero-signature{
-    font-family: 'Petit Formal Script', cursive;
-    font-size: 52px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    pointer-events: none;
-    user-select: none;
-}
-
 header h1{
     font-size: 13px;
     letter-spacing: 4px;
