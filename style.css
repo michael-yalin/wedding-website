@@ -869,14 +869,25 @@ header a p{
 
 .attend{
     position: relative;
-    padding: 0 25px;
-    margin: 30px 10px;
+    padding: 8px 22px;
+    margin: 8px 6px;
     cursor: pointer;
     display: inline-block;
     font-weight: 900;
+    border: 1px solid rgba(128, 129, 116, 0.5);
+    border-radius: 30px;
+    color: rgb(128, 129, 116);
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .attend input{ position: absolute; opacity: 0; }
+
+.attend:has(input:checked){
+    background-color: rgb(128, 129, 116);
+    border-color: rgb(128, 129, 116);
+    color: rgb(255, 255, 255);
+}
 
 .attend .flower-deco{
     position: absolute;
@@ -894,7 +905,7 @@ header a p{
 
 .attend-flower1{ left: 0; transform: scaleX(-1) rotate(20deg); }
 .attend-flower2{ right: 0; transform: rotate(20deg); }
-.attend:hover img{ opacity: 0.5; }
+.attend:hover .flower-deco{ opacity: 0.5; }
 .attend input:checked ~ .flower-deco{ opacity: 1; }
 
 .form-grid{ text-indent: 0; text-align: left; margin: 15px 0 ; }
@@ -1097,4 +1108,34 @@ footer div{ padding: 5px 0; }
 
 @media screen and (min-width: 600px) {
     #invite h2{ font-size: 30px; }
+}
+
+/* ---------- Mobile: tighter letter-spacing + responsive widths so
+   Chinese text has room to breathe instead of wrapping 1-2 chars/line ---------- */
+@media screen and (max-width: 600px) {
+    body{ letter-spacing: 1px; }
+
+    .intro-box{
+        width: 82vw;
+        max-width: 280px;
+        padding: 90px 24px 40px 24px;
+        margin: 130px 16px;
+    }
+
+    #invite div{ width: 88vw; max-width: 320px; }
+    #invite p{ letter-spacing: 2px; padding: 30px 12px 0 12px; }
+
+    #timeline{ width: 220px; }
+
+    .activity{ letter-spacing: 2px; }
+
+    #traffic-content{ padding: 20px 24px; letter-spacing: 1px; }
+    .guide{ padding-right: 10px; }
+
+    .dresscode-box.active{ width: 85vw; max-width: 300px; }
+    .dresscode-note{ letter-spacing: 1px; padding: 0 20px 24px 20px; }
+
+    #RSVParea{ max-width: 90vw; }
+
+    input[type=submit]{ letter-spacing: 3px; }
 }
