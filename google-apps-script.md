@@ -4,6 +4,8 @@
 
 ## 步驟一：建立 Google Sheet
 
+> **重要**：請先登出目前的 Google 帳號，改用 **michaelyalin1011@gmail.com** 登入 Google，再做以下所有步驟。因為 `MailApp.sendEmail()` 寄信時，寄件人會是「部署 Apps Script 時登入/授權的那個帳號」，所以整個 Sheet 跟 Apps Script 都要在這個帳號底下建立，寄出的信才會是從 michaelyalin1011@gmail.com 寄出。
+
 1. 開一個新的 Google Sheet，命名為例如「Yalin & Michael 婚禮 RSVP」。
 2. 在第一列（Row 1）建立以下欄位標題（順序需與程式碼一致）：
 
@@ -77,32 +79,22 @@ function sendNotificationEmails(p) {
     '留言：' + (p.MESSAGE || '（無）')
   ].join('\n');
 
-  // 1) 寄給新郎新娘：通知有新的 RSVP 回覆
-  var coupleRecipients = [GROOM_EMAIL, BRIDE_EMAIL].filter(String).join(',');
-  if (coupleRecipients) {
-    MailApp.sendEmail({
-      to: coupleRecipients,
-      subject: '[婚禮 RSVP] ' + (p.NAME || '賓客') + ' 已回覆表單',
-      body: '有新的 RSVP 回覆：\n\n' + detailLines
-    });
-  }
+  // 收件人：填表的賓客 + 新郎 + 新娘，三個人收同一封信
+  var recipients = [p.EMAIL, GROOM_EMAIL, BRIDE_EMAIL].filter(String).join(',');
+  if (!recipients) return;
 
-  // 2) 寄給填表的賓客：感謝與確認信
-  if (p.EMAIL) {
-    var guestBody =
-      (p.NAME || '') + ' 您好，\n\n' +
-      '感謝您填寫 ' + COUPLE_NAMES + ' 的婚禮 RSVP 表單，我們已經收到您的回覆：\n\n' +
-      detailLines + '\n\n' +
-      '婚禮時間地點：' + WEDDING_DATE_TEXT + '\n' +
-      '期待與您相聚！\n\n' +
-      COUPLE_NAMES;
+  var body =
+    (p.NAME || '賓客') + ' 填寫了婚禮 RSVP 表單，內容如下：\n\n' +
+    detailLines + '\n\n' +
+    '婚禮時間地點：' + WEDDING_DATE_TEXT + '\n' +
+    '期待與您相聚！\n\n' +
+    COUPLE_NAMES;
 
-    MailApp.sendEmail({
-      to: p.EMAIL,
-      subject: '[' + COUPLE_NAMES + '] 已收到您的 RSVP 回覆',
-      body: guestBody
-    });
-  }
+  MailApp.sendEmail({
+    to: recipients,
+    subject: '[' + COUPLE_NAMES + '] ' + (p.NAME || '賓客') + ' 的 RSVP 回覆',
+    body: body
+  });
 }
 ```
 
@@ -115,7 +107,7 @@ function sendNotificationEmails(p) {
 2. 點選左側齒輪圖示，選擇類型為 **網頁應用程式 (Web app)**。
 3. 設定：
    - **說明**：Wedding RSVP v1（隨意填寫）
-   - **執行身分 (Execute as)**：我 (你的 Google 帳號)
+   - **執行身分 (Execute as)**：我 (**務必確認這裡是 michaelyalin1011@gmail.com**，寄出的信才會是這個地址)
    - **誰可以存取 (Who has access)**：**任何人 (Anyone)**（務必選這個，否則前端無法呼叫）
 4. 點選 **部署 (Deploy)**。
 5. 第一次部署時 Google 會要求「授權存取權限」，依畫面指示選擇你的帳號 → 點選「進階」→「前往 (專案名稱)（不安全）」→ 允許。
@@ -155,16 +147,19 @@ const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycb.../e
 
 ## 關於自動寄信通知
 
-`sendNotificationEmails()` 會在每次表單成功送出、資料寫入 Sheet 之後自動寄出兩封信：
+`sendNotificationEmails()` 會在每次表單成功送出、資料寫入 Sheet 之後，寄出**一封信**，收件人是：
 
-1. **給新郎新娘**：寄到 `GROOM_EMAIL` 和 `BRIDE_EMAIL`，通知「某某人已經回覆 RSVP」，內容包含賓客填寫的所有欄位。
-2. **給填表的賓客**：用賓客填的 Email 寄一封確認信，告知已收到回覆、再次附上婚禮時間地點。
+- 填表的賓客（`p.EMAIL`）
+- 新郎（`GROOM_EMAIL`）
+- 新娘（`BRIDE_EMAIL`）
 
-這是用 Apps Script 內建的 `MailApp.sendEmail()`，寄件人會顯示成你部署時登入的那個 Google 帳號（步驟三「執行身分」選的那個帳號），不需要額外設定 SMTP 或 API 金鑰。
+三個人會收到同一封信，內容是這次 RSVP 回覆的所有欄位。
 
-**寄信額度**：`MailApp` 用的是你 Google 帳號本身的每日寄信配額——一般 Gmail 帳號約 100 封/天，Google Workspace 帳號約 1500 封/天。婚禮賓客量通常遠低於這個額度，不用擔心；但如果你短時間內反覆測試表單，也會計入額度。
+這是用 Apps Script 內建的 `MailApp.sendEmail()`，**寄件人會是「部署時登入並授權的那個 Google 帳號」**——也就是步驟一提到的 **michaelyalin1011@gmail.com**。這不是可以隨意指定的參數，而是取決於你用哪個帳號建立 Sheet、寫程式碼、部署 Web App，所以务必全程用這個帳號操作。
 
-**如果不想寄某一封**：例如不想寄確認信給賓客，只想自己收到通知，把 `sendNotificationEmails` 裡「2) 寄給填表的賓客」那一段整段刪掉即可；反之若只想寄給賓客不想通知自己，刪掉「1) 寄給新郎新娘」那段。
+**寄信額度**：`MailApp` 用的是 michaelyalin1011@gmail.com 這個帳號本身的每日寄信配額——一般 Gmail 帳號約 100 封/天。婚禮賓客量通常遠低於這個額度，不用擔心；但如果你短時間內反覆測試表單，也會計入額度。
+
+**如果賓客沒填 Email 也想寄**：目前邏輯是賓客一定會填 Email（前端有驗證必填），所以三個收件人一定都在；如果之後想拿掉某個收件人，直接調整 `recipients` 那一行的陣列即可。
 
 ## 疑難排解
 
