@@ -10,8 +10,11 @@ const GOOGLE_SHEET_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 const WEDDING_DATE = new Date('Oct 11, 2026 11:00:00');
 
 /* ---------------- Gallery photos ----------------
-   The grid shows small compressed thumbnails (fast to load); the full-
-   resolution original is only fetched when a photo is opened in the viewer. */
+   Grid = small compressed thumbnails (reference/gallery/thumbs, ~600px).
+   Viewer = medium compressed images (reference/gallery/medium, ~1600px) —
+   plenty sharp for on-screen viewing, but a fraction of the original
+   phone-camera file size (raw originals are kept in reference/gallery
+   as an archive but are no longer fetched by the site itself). */
 const GALLERY_FILENAMES = [
   'IMG_0279.JPG', 'IMG_0280.JPG', 'IMG_0295.JPG', 'IMG_0296.JPG',
   'IMG_0297.JPG', 'IMG_0298.JPG', 'IMG_0299.JPG', 'IMG_0300.JPG',
@@ -20,7 +23,7 @@ const GALLERY_FILENAMES = [
   'IMG_0347.JPG', 'IMG_0348.JPG', 'IMG_0366.JPG', 'IMG_0367.JPG',
   'IMG_0368.JPG', 'IMG_0369.JPG'
 ];
-const GALLERY_PHOTOS = GALLERY_FILENAMES.map(name => `reference/gallery/${name}`);
+const GALLERY_PHOTOS = GALLERY_FILENAMES.map(name => `reference/gallery/medium/${name}`);
 const GALLERY_THUMBS = GALLERY_FILENAMES.map(name => `reference/gallery/thumbs/${name}`);
 
 function buildGalleryGrid() {
