@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Save the Date for the wedding of Michael and Yalin!">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael and Yalin｜Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg" id="homebg"></div>
+<div class="bg" id="secondbg"></div>
+<div class="bg" id="thirdbg"></div>
+
+<header id="header">
+    <div class="hero-signature">Michael &amp; Yalin</div>
+    <h1>
+        2026.10.11<br>
+        Michael <span class="amp">&amp;</span> Yalin
+    </h1>
+    <a href="javascript:void(0)" onclick="JumpTo('intro')">
+        <p>scroll</p>
+        <div id="scroll-line"></div>
+    </a>
+</header>
+
+<div id="intro">
+    <div class="intro-box">
+        <div id="groom"></div>
+        <p><b>MICHAEL 謝宗祐</b></p>
+        <p class="intro-content">
+            外表I人的超級E人。<br>
+            大家口中認真、負責、有禮貌零負評好青年（？）<br>
+            遇到新娘後弄丟了八塊肌，<br>
+            現在在找回八塊肌的旅程中迷路。
+        </p>
+        <span class="intro-title">groom</span>
+    </div>
+    <div class="intro-box">
+        <div id="bride"></div>
+        <p><b>YALIN 黃雅琳</b></p>
+        <p class="intro-content">
+            外表E人的超級I人。<br>
+            雖然口直心快很愛對新郎碎碎唸，<br>
+            優點是對新郎很好、很能包容新郎的缺點，<br>
+            常常會做些逗新郎笑的事。
+        </p>
+        <span class="intro-title">bride</span>
+    </div>
+</div>
+
+<div id="invite" class="invite">
+    <div>
+        <div class="invite-img"></div>
+        <span id="invite-flower1"></span>
+        <span id="invite-flower2"></span>
+        <h2>we're getting married</h2>
+    </div>
+    <p>
+        邀請你們2026.10.11（日）<br>
+        前往台北漢來大飯店<br>與我們一起慶祝
+    </p>
+</div>
+
+<div id="schedule">
+    <h2>Schedule</h2>
+    <div id="right-flowers">
+        <span class="flowers" id="right-flower1"></span>
+        <span class="flowers" id="right-flower2"></span>
+        <span class="flowers" id="right-flower3"></span>
+    </div>
+    <div id="left-flowers">
+        <span class="flowers" id="left-flower1"></span>
+        <span class="flowers" id="left-flower2"></span>
+    </div>
+    <div id="timeline">
+        <div class="time" id="time1">11:00<br>AM</div>
+        <div class="time" id="time2">11:20<br>AM</div>
+        <div class="time" id="time3">11:40<br>AM</div>
+        <div class="time" id="time4">12:20<br>PM</div>
+        <div class="time" id="time5">14:40<br>PM</div>
+        <div class="activity" id="activity1">迎賓簽到</div>
+        <div class="activity" id="activity2">證婚儀式</div>
+        <div class="activity" id="activity3">合照時間</div>
+        <div class="activity" id="activity4">午宴</div>
+        <div class="activity" id="activity5">送客合照</div>
+    </div>
+</div>
+
+<div id="traffic">
+    <div id="traffic-box">
+        <h2>Traffic</h2>
+        <div class="map">
+            <a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E6%BC%A2%E4%BE%86%E5%A4%A7%E9%A3%AF%E5%BA%97" target="_blank" rel="noopener">
+                <svg class="pin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+                &nbsp;open google maps
+            </a>
+        </div>
+        <div id="traffic-content">
+            <div class="theplace">
+                台北漢來大飯店
+            </div>
+            <div class="guide">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor" width="14px" height="14px" style="padding-top: 7px;"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+                </div>
+                <div>台北市南港區經貿一路168號</div>
+
+                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="14px" height="14px" style="padding-top: 7px;"><path d="M96 0C43 0 0 43 0 96L0 352c0 48 35.2 87.7 81.1 94.9l-46 46C28.1 499.9 33.1 512 43 512l39.7 0c8.5 0 16.6-3.4 22.6-9.4L160 448l128 0 54.6 54.6c6 6 14.1 9.4 22.6 9.4l39.7 0c10 0 15-12.1 7.9-19.1l-46-46c46-7.1 81.1-46.9 81.1-94.9l0-256c0-53-43-96-96-96L96 0zM64 96c0-17.7 14.3-32 32-32l256 0c17.7 0 32 14.3 32 32l0 96c0 17.7-14.3 32-32 32L96 224c-17.7 0-32-14.3-32-32l0-96zM224 288a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg></div>
+                <div>捷運：搭乘【BR文湖線】或【BL板南線】<br>至南港展覽館站1號出口 → 步行約5分鐘。</div>
+
+                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" width="14px" height="14px" style="padding-top: 7px;"><path d="M96 0C43 0 0 43 0 96L0 352c0 48 35.2 87.7 81.1 94.9l-46 46C28.1 499.9 33.1 512 43 512l39.7 0c8.5 0 16.6-3.4 22.6-9.4L160 448l128 0 54.6 54.6c6 6 14.1 9.4 22.6 9.4l39.7 0c10 0 15-12.1 7.9-19.1l-46-46c46-7.1 81.1-46.9 81.1-94.9l0-256c0-53-43-96-96-96L96 0zM64 96c0-17.7 14.3-32 32-32l256 0c17.7 0 32 14.3 32 32l0 96c0 17.7-14.3 32-32 32L96 224c-17.7 0-32-14.3-32-32l0-96zM224 288a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg></div>
+                <div>搭乘高鐵：至南港站 → 捷運板南線<br>南港展覽館站1號出口 → 步行約5分鐘。</div>
+
+                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" width="14px" height="14px" style="padding-top: 7px;"><path d="M135.2 117.4L109.1 192l293.8 0-26.1-74.6C372.3 104.6 360.2 96 346.6 96L165.4 96c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32l181.2 0c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2l0 144 0 48c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-48L96 400l0 48c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-48L0 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg></div>
+                <div>自行駕車：汽車可停放至台北漢來飯店<br>停車場，停車場請由【經貿一路】進入。</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dresscode">
+    <div class="dresscode-box">
+        <div class="dresscode-img"></div>
+        <h2>Dress code</h2>
+        <div id="dresscode-flower">
+            <span class="flowers" id="dresscode-flower1"></span>
+            <span class="flowers" id="dresscode-flower2"></span>
+        </div>
+        <div id="dresscode-content">
+            <div id="dresscode-grid">
+                <div class="circle" id="circle1"></div>
+                <div>KHAKI</div>
+                <div class="circle" id="circle2"></div>
+                <div>CAMEL</div>
+                <div class="circle" id="circle3"></div>
+                <div>BEIGE</div>
+                <div class="circle" id="circle4"></div>
+                <div>ESPRESSO</div>
+            </div>
+            <p class="dresscode-note">誠邀著大地色系服裝出席</p>
+        </div>
+    </div>
+</div>
+
+<div class="photo-video">
+    <h2>Album</h2>
+    <div class="photo"><a href="javascript:void(0)" onclick="showgallery()">看更多照片</a></div>
+</div>
+
+<a href="javascript:void(0)" id="closebutton" onclick="closegallery()">&times;</a>
+<div id="gallery">
+    <div id="photo-gallery">
+        <div id="photo-gallery-grid"></div>
+        <p>photos by Michael &amp; Yalin</p>
+    </div>
+</div>
+
+<div id="photo-viewer">
+    <button class="viewer-nav viewer-prev" onclick="showPrevViewerPhoto()" aria-label="Previous">&#10094;</button>
+    <img src="" alt="" id="viewerImg">
+    <button class="viewer-nav viewer-next" onclick="showNextViewerPhoto()" aria-label="Next">&#10095;</button>
+</div>
+
+<div class="countdown-area" id="countdown-area">
+    <h2>Wedding Countdown</h2>
+    <p>距離婚禮還有</p>
+    <div class="countdown-area-box">
+        <div id="days"></div>
+        <div id="hours"></div>
+        <div id="mins"></div>
+        <div id="secs"></div>
+        <p>Days</p>
+        <p>Hours</p>
+        <p>Mins</p>
+        <p>Secs</p>
+    </div>
+    <p>期待與你們見面！</p>
+</div>
+
+<div id="RSVP" class="RSVP">
+    <h2>RSVP</h2>
+    <div id="RSVPcircle">M<br><span style="font-size: 10px;">&amp;</span><br>Y</div>
+    <div id="RSVParea">
+        <form id="form1">
+
+            <label for="attend-yes" class="attend" onclick="AttendFunction('form1')">出席
+                <input type="radio" id="attend-yes" value="出席" name="ATTEND" checked>
+                <span class="flower-deco attend-flower1"></span>
+                <span class="flower-deco attend-flower2"></span>
+            </label>
+            <label for="attend-no" class="attend" onclick="AttendFunction('form1')">無法出席
+                <input type="radio" id="attend-no" value="無法出席" name="ATTEND">
+                <span class="flower-deco attend-flower1"></span>
+                <span class="flower-deco attend-flower2"></span>
+            </label>
+
+            <div class="form-grid">
+                <div class="form-title"><label for="Name">姓名</label></div>
+                <div>
+                    <input type="text" id="Name" name="NAME">
+                    <span class="field-error" id="err-Name"></span>
+                </div>
+
+                <div class="form-title"><label for="Email">Email</label></div>
+                <div>
+                    <input type="email" id="Email" name="EMAIL">
+                    <span class="field-error" id="err-Email"></span>
+                </div>
+
+                <div class="form-title"><label for="Phone">手機</label></div>
+                <div>
+                    <input type="tel" id="Phone" name="PHONE">
+                    <span class="field-error" id="err-Phone"></span>
+                </div>
+
+                <div class="form-title not-attend"><label for="AttendCount">參加人數（包含自己）</label></div>
+                <div class="not-attend">
+                    <select id="AttendCount" name="ATTENDCOUNT">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <span class="field-error" id="err-AttendCount"></span>
+                </div>
+
+                <div class="form-title not-attend">是否需要兒童餐椅</div>
+                <div class="not-attend">
+                    <label for="childchair-yes" class="attend" onclick="ToggleFunction('form1','CHILDCHAIR')">需要
+                        <input type="radio" id="childchair-yes" value="需要" name="CHILDCHAIR">
+                        <span class="flower-deco attend-flower1"></span>
+                        <span class="flower-deco attend-flower2"></span>
+                    </label>
+                    <label for="childchair-no" class="attend" onclick="ToggleFunction('form1','CHILDCHAIR')">不需要
+                        <input type="radio" id="childchair-no" value="不需要" name="CHILDCHAIR" checked>
+                        <span class="flower-deco attend-flower1"></span>
+                        <span class="flower-deco attend-flower2"></span>
+                    </label>
+                </div>
+
+                <div class="form-title not-attend"><label for="VegCount">素食人數</label></div>
+                <div class="not-attend">
+                    <select id="VegCount" name="VEGCOUNT">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="form-title"><label for="Invitation">是否需要紙本喜帖</label></div>
+                <div>
+                    <select id="Invitation" name="INVITATION" onchange="InvitationFunction()">
+                        <option value=""></option>
+                        <option value="需要">需要</option>
+                        <option value="不需要">不需要</option>
+                    </select>
+                    <span class="field-error" id="err-Invitation"></span>
+                </div>
+
+                <div class="form-title" id="addressLabel" style="display:none;"><label for="Address">喜帖寄送地址</label></div>
+                <div id="addressRow" class="is-hidden">
+                    <input type="text" id="Address" name="ADDRESS" placeholder="請填郵遞區號＋地址">
+                    <span class="field-error" id="err-Address"></span>
+                </div>
+
+                <div class="form-title not-attend">是否開車前往</div>
+                <div class="not-attend">
+                    <label for="driving-yes" class="attend" onclick="ToggleFunction('form1','DRIVING')">是
+                        <input type="radio" id="driving-yes" value="是" name="DRIVING">
+                        <span class="flower-deco attend-flower1"></span>
+                        <span class="flower-deco attend-flower2"></span>
+                    </label>
+                    <label for="driving-no" class="attend" onclick="ToggleFunction('form1','DRIVING')">否
+                        <input type="radio" id="driving-no" value="否" name="DRIVING" checked>
+                        <span class="flower-deco attend-flower1"></span>
+                        <span class="flower-deco attend-flower2"></span>
+                    </label>
+                </div>
+
+            </div>
+            <div class="form-title">LEAVE A MESSAGE</div>
+            <textarea id="Message" name="MESSAGE" rows="8" placeholder="留言祝福我們吧!"></textarea>
+        </form>
+
+        <input type="submit" value="送出" id="submitbutton" onclick="submitform1()">
+
+    </div>
+</div>
+
+<div id="submit-success">
+    <div>
+        <h1>感謝填寫！</h1>
+        <div>期待與你們相聚<br>Michael &amp; Yalin</div>
+        <a href="javascript:void(0)" id="submitokbutton" onclick="submitok()">確認</a>
+    </div>
+</div>
+
+<div id="loading">
+    <div id="loader"></div>
+</div>
+
+<footer>
+    <a href="javascript:void(0)" onclick="JumpTo('header')">TOP</a>
+    <div>期待與你們見面</div>
+    <div class="footer-signature">Michael &amp; Yalin</div>
+    <div>2026.10.11</div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body>
+</html>
