@@ -245,7 +245,7 @@ header a p{
     aspect-ratio: 1 / 1.5;
     border-radius: 200px 200px 0 0;
     margin: auto;
-    background-image: url('reference/gallery/IMG_0279.JPG');
+    background-image: url('reference/gallery/thumbs/IMG_0279.JPG');
     background-size: cover;
     background-position: 50% 20%;
 }
@@ -580,7 +580,7 @@ header a p{
     position: absolute;
     width: 80%;
     height: 120%;
-    background-image: url('reference/gallery/IMG_0344.JPG');
+    background-image: url('reference/gallery/thumbs/IMG_0344.JPG');
     background-repeat: no-repeat;
     background-size: cover;
     left: -55%;
@@ -685,7 +685,7 @@ header a p{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('reference/gallery/IMG_0300.JPG');
+    background-image: url('reference/gallery/thumbs/IMG_0300.JPG');
     width: 200px;
     height: 270px;
     border-radius: 130px 130px 0 0;

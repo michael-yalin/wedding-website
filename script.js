@@ -9,21 +9,25 @@ const GOOGLE_SHEET_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
 const WEDDING_DATE = new Date('Oct 11, 2026 11:00:00');
 
-/* ---------------- Gallery photos ---------------- */
-const GALLERY_PHOTOS = [
+/* ---------------- Gallery photos ----------------
+   The grid shows small compressed thumbnails (fast to load); the full-
+   resolution original is only fetched when a photo is opened in the viewer. */
+const GALLERY_FILENAMES = [
   'IMG_0279.JPG', 'IMG_0280.JPG', 'IMG_0295.JPG', 'IMG_0296.JPG',
   'IMG_0297.JPG', 'IMG_0298.JPG', 'IMG_0299.JPG', 'IMG_0300.JPG',
   'IMG_0301.JPG', 'IMG_0302.JPG', 'IMG_0303.JPG', 'IMG_0304.JPG',
   'IMG_0305.JPG', 'IMG_0343.JPG', 'IMG_0344.JPG', 'IMG_0345.JPG',
   'IMG_0347.JPG', 'IMG_0348.JPG', 'IMG_0366.JPG', 'IMG_0367.JPG',
   'IMG_0368.JPG', 'IMG_0369.JPG'
-].map(name => `reference/gallery/${name}`);
+];
+const GALLERY_PHOTOS = GALLERY_FILENAMES.map(name => `reference/gallery/${name}`);
+const GALLERY_THUMBS = GALLERY_FILENAMES.map(name => `reference/gallery/thumbs/${name}`);
 
 function buildGalleryGrid() {
   const grid = document.getElementById('photo-gallery-grid');
-  GALLERY_PHOTOS.forEach((src, index) => {
+  GALLERY_THUMBS.forEach((thumbSrc, index) => {
     const img = document.createElement('img');
-    img.src = src;
+    img.src = thumbSrc;
     img.alt = '婚禮相簿照片 ' + (index + 1);
     img.loading = 'lazy';
     img.addEventListener('click', () => openViewer(index));
