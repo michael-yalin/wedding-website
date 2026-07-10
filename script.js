@@ -74,11 +74,13 @@ document.addEventListener('click', (e) => {
 });
 
 /* ---------------- Background music (YouTube IFrame Player API) ----------------
-   We drive playback through the official IFrame API and call playVideo() from the
-   player's onReady event, rather than relying on the iframe URL's autoplay=1 flag.
-   Browser autoplay policies honor an explicit API play command (tied to the user's
-   "是" tap) far more reliably than the URL param — which is why some guests
-   previously had to toggle the button off and on again before any sound played. */
+   iOS Safari only starts audio when playVideo() runs *synchronously* inside the
+   user's tap handler. So we PRE-CREATE the player on page load (autoplay off);
+   by the time the guest taps "是", the player is already ready and toggleMusic()
+   can call playVideo() directly within the tap — which iOS honors. The previous
+   version created the player on the first tap and only played later in onReady,
+   outside the gesture, so iOS blocked it and users had to toggle off/on to get a
+   direct in-gesture play command. */
 const MUSIC_VIDEO_ID = 'jHQv4c7qLjc';
 let ytPlayer = null;      // YT.Player instance, once created
 let ytReady = false;      // true once the player can accept API commands
@@ -117,7 +119,7 @@ function onYouTubeIframeAPIReady() {
     height: '1',
     videoId: MUSIC_VIDEO_ID,
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
       controls: 0,
       loop: 1,
       playlist: MUSIC_VIDEO_ID,
@@ -126,11 +128,9 @@ function onYouTubeIframeAPIReady() {
     events: {
       onReady: function (e) {
         ytReady = true;
-        if (musicWanted) {
-          e.target.playVideo();
-        } else {
-          e.target.pauseVideo();
-        }
+        // Only relevant if the guest tapped "是" before the player finished
+        // loading (slow network). Normal case: musicWanted is still false here.
+        if (musicWanted) e.target.playVideo();
       }
     }
   });
@@ -144,10 +144,10 @@ function toggleMusic() {
   const offLine = document.getElementById('music-off-line');
   if (!musicPlaying) {
     musicWanted = true;
-    if (!ytPlayer) {
-      createMusicPlayer();       // first tap: build the player; onReady will play
-    } else if (ytReady) {
-      ytPlayer.playVideo();
+    if (ytPlayer && ytReady) {
+      ytPlayer.playVideo();      // synchronous in-gesture play — iOS honors this
+    } else {
+      createMusicPlayer();       // preload didn't finish yet; onReady will play
     }
     musicPlaying = true;
     offLine.classList.add('playmusic');
@@ -377,4 +377,5 @@ document.addEventListener('DOMContentLoaded', () => {
   reveal();
   revealbg2();
   revealbg3();
+  createMusicPlayer(); // preload the YouTube player so the "是" tap can play in-gesture (iOS)
 });
