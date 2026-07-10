@@ -73,32 +73,67 @@ document.addEventListener('click', (e) => {
   if (e.target.id === 'photo-viewer') closeViewer();
 });
 
-/* ---------------- Background music (embedded YouTube) ---------------- */
+/* ---------------- Background music (YouTube IFrame Player API) ----------------
+   We drive playback through the official IFrame API and call playVideo() from the
+   player's onReady event, rather than relying on the iframe URL's autoplay=1 flag.
+   Browser autoplay policies honor an explicit API play command (tied to the user's
+   "是" tap) far more reliably than the URL param — which is why some guests
+   previously had to toggle the button off and on again before any sound played. */
 const MUSIC_VIDEO_ID = 'jHQv4c7qLjc';
-let musicIframe = null;
-let musicPlaying = false;
+let ytPlayer = null;      // YT.Player instance, once created
+let ytReady = false;      // true once the player can accept API commands
+let musicPlaying = false; // whether the user currently wants music on
+let musicWanted = false;  // desired state, applied as soon as the player is ready
 
-function createMusicIframe() {
-  if (musicIframe) return;
-  musicIframe = document.createElement('iframe');
-  musicIframe.id = 'yt-audio-frame';
-  musicIframe.width = '1';
-  musicIframe.height = '1';
-  musicIframe.style.position = 'fixed';
-  musicIframe.style.bottom = '0';
-  musicIframe.style.right = '0';
-  musicIframe.style.opacity = '0';
-  musicIframe.style.pointerEvents = 'none';
-  musicIframe.allow = 'autoplay';
-  musicIframe.src = 'https://www.youtube.com/embed/' + MUSIC_VIDEO_ID +
-    '?autoplay=1&enablejsapi=1&controls=0&loop=1&playlist=' + MUSIC_VIDEO_ID +
-    '&origin=' + encodeURIComponent(window.location.origin);
-  document.body.appendChild(musicIframe);
+function loadYouTubeAPI() {
+  if (window.YT && window.YT.Player) { onYouTubeIframeAPIReady(); return; }
+  if (document.getElementById('yt-iframe-api')) return; // already loading
+  const tag = document.createElement('script');
+  tag.id = 'yt-iframe-api';
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.body.appendChild(tag);
 }
 
-function ytCommand(func) {
-  if (!musicIframe || !musicIframe.contentWindow) return;
-  musicIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+function createMusicPlayer() {
+  if (ytPlayer || document.getElementById('yt-audio-frame')) return;
+  const holder = document.createElement('div');
+  holder.id = 'yt-audio-frame';
+  holder.style.position = 'fixed';
+  holder.style.bottom = '0';
+  holder.style.right = '0';
+  holder.style.width = '1px';
+  holder.style.height = '1px';
+  holder.style.opacity = '0';
+  holder.style.pointerEvents = 'none';
+  document.body.appendChild(holder);
+  loadYouTubeAPI();
+}
+
+// Global callback invoked automatically once the IFrame API script has loaded.
+function onYouTubeIframeAPIReady() {
+  if (ytPlayer) return;
+  ytPlayer = new YT.Player('yt-audio-frame', {
+    width: '1',
+    height: '1',
+    videoId: MUSIC_VIDEO_ID,
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      loop: 1,
+      playlist: MUSIC_VIDEO_ID,
+      playsinline: 1
+    },
+    events: {
+      onReady: function (e) {
+        ytReady = true;
+        if (musicWanted) {
+          e.target.playVideo();
+        } else {
+          e.target.pauseVideo();
+        }
+      }
+    }
+  });
 }
 
 function hideMusicConsent() {
@@ -108,16 +143,18 @@ function hideMusicConsent() {
 function toggleMusic() {
   const offLine = document.getElementById('music-off-line');
   if (!musicPlaying) {
-    if (musicIframe) {
-      ytCommand('playVideo');
-    } else {
-      createMusicIframe();
+    musicWanted = true;
+    if (!ytPlayer) {
+      createMusicPlayer();       // first tap: build the player; onReady will play
+    } else if (ytReady) {
+      ytPlayer.playVideo();
     }
     musicPlaying = true;
     offLine.classList.add('playmusic');
     hideMusicConsent();
   } else {
-    ytCommand('pauseVideo');
+    musicWanted = false;
+    if (ytPlayer && ytReady) ytPlayer.pauseVideo();
     musicPlaying = false;
     offLine.classList.remove('playmusic');
   }
@@ -130,7 +167,7 @@ function JumpTo(id) {
 /* ---------------- Scroll reveal (mirrors reference site) ---------------- */
 function reveal() {
   const reveals = document.querySelectorAll(
-    '.countdown-area-box>div,.photo,.dresscode-box,.theplace,.guide,.map a,.intro-box,.intro-content,.time,.invite h2,.invite p'
+    '.countdown-area-box>div,.photo,.dresscode-box,.theplace,.guide,.map-link,.intro-box,.intro-content,.time,.invite h2,.invite p'
   );
   const windowHeight = window.innerHeight;
   reveals.forEach((el) => {
