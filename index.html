@@ -11,6 +11,20 @@
 </head>
 <body>
 
+<div id="music-onoroff">
+    <div>
+        <p>進入網站前，請先選擇<br>是否想搭配音樂瀏覽喜帖？</p>
+        <a href="javascript:void(0)" onclick="toggleMusic()">是</a>
+        <a href="javascript:void(0)" onclick="hideMusicConsent()">否</a>
+        <p style="font-size: 12px;">＊之後仍可透過右下角開關音樂唷！</p>
+    </div>
+</div>
+
+<div class="music-button" onclick="toggleMusic()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M8 17V5l12-2v12"/></svg>
+    <div class="music-off-line" id="music-off-line"></div>
+</div>
+
 <div class="bg" id="homebg"></div>
 <div class="bg" id="secondbg"></div>
 <div class="bg" id="thirdbg"></div>
@@ -77,16 +91,12 @@
         <span class="flowers" id="left-flower2"></span>
     </div>
     <div id="timeline">
-        <div class="time" id="time1">11:00<br>AM</div>
-        <div class="time" id="time2">11:20<br>AM</div>
-        <div class="time" id="time3">11:40<br>AM</div>
-        <div class="time" id="time4">12:20<br>PM</div>
-        <div class="time" id="time5">14:40<br>PM</div>
+        <div class="time" id="time1">11:40<br>AM</div>
+        <div class="time" id="time2">12:20<br>PM</div>
+        <div class="time" id="time3">14:40<br>PM</div>
         <div class="activity" id="activity1">迎賓簽到</div>
-        <div class="activity" id="activity2">證婚儀式</div>
-        <div class="activity" id="activity3">合照時間</div>
-        <div class="activity" id="activity4">午宴</div>
-        <div class="activity" id="activity5">送客合照</div>
+        <div class="activity" id="activity2">午宴</div>
+        <div class="activity" id="activity3">送客合照</div>
     </div>
 </div>
 
@@ -133,13 +143,15 @@
         <div id="dresscode-content">
             <div id="dresscode-grid">
                 <div class="circle" id="circle1"></div>
-                <div>KHAKI</div>
+                <div class="dresscode-label">米白色 BEIGE</div>
                 <div class="circle" id="circle2"></div>
-                <div>CAMEL</div>
+                <div class="dresscode-label">淺卡其 SAND</div>
                 <div class="circle" id="circle3"></div>
-                <div>BEIGE</div>
+                <div class="dresscode-label">灰褐色 TAUPE</div>
                 <div class="circle" id="circle4"></div>
-                <div>ESPRESSO</div>
+                <div class="dresscode-label">深咖啡 COCOA</div>
+                <div class="circle" id="circle5"></div>
+                <div class="dresscode-label">灰色 CHARCOAL</div>
             </div>
             <p class="dresscode-note">誠邀著大地色系服裝出席</p>
         </div>
@@ -217,22 +229,40 @@
                     <span class="field-error" id="err-Phone"></span>
                 </div>
 
-                <div class="form-title not-attend"><label for="AttendCount">參加人數（包含自己）</label></div>
+                <div class="form-title not-attend"><label for="AdultCount">參加人數（包含自己）</label></div>
                 <div class="not-attend">
-                    <select id="AttendCount" name="ATTENDCOUNT">
-                        <option value=""></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    <span class="field-error" id="err-AttendCount"></span>
+                    <div class="AandK">
+                        <label for="AdultCount">大人</label>
+                        <select id="AdultCount" name="ADULTCOUNT">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <span>人、小孩</span>
+                        <select id="ChildCount" name="CHILDCOUNT">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <span>人</span>
+                    </div>
+                    <span class="field-error" id="err-AdultCount"></span>
                 </div>
 
                 <div class="form-title not-attend">是否需要兒童餐椅</div>

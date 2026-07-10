@@ -339,9 +339,7 @@ header a p{
     grid-template-areas:
       'time1 activity1'
       'time2 activity2'
-      'time3 activity3'
-      'time4 activity4'
-      'time5 activity5';
+      'time3 activity3';
     width: 260px;
     row-gap: 50px;
     justify-content: center;
@@ -395,13 +393,9 @@ header a p{
 #time1{ grid-area: time1; }
 #time2{ grid-area: time2; }
 #time3{ grid-area: time3; }
-#time4{ grid-area: time4; }
-#time5{ grid-area: time5; }
 #activity1{ grid-area: activity1; }
 #activity2{ grid-area: activity2; }
 #activity3{ grid-area: activity3; }
-#activity4{ grid-area: activity4; }
-#activity5{ grid-area: activity5; }
 
 #right-flowers{ position: absolute; top: 20%; right: 0; }
 #left-flowers{ position: absolute; bottom: 20%; left: 0; }
@@ -568,7 +562,7 @@ header a p{
     transition: 1s;
 }
 
-.dresscode-box.active{ opacity: 1; width: 320px; }
+.dresscode-box.active{ opacity: 1; width: 340px; }
 
 .dresscode-img{
     position: absolute;
@@ -648,10 +642,17 @@ header a p{
 
 .circle{ width: 60px; height: 60px; border-radius: 50%; }
 
-#circle1{ background-color: rgb(139, 116, 84); }
-#circle2{ background-color: rgb(166, 138, 100); }
-#circle3{ background-color: rgb(201, 180, 138); }
-#circle4{ background-color: rgb(90, 74, 58); }
+#circle1{ background-color: #EDE7DB; }
+#circle2{ background-color: #D8CFBE; }
+#circle3{ background-color: #A69F8D; }
+#circle4{ background-color: #77624B; }
+#circle5{ background-color: #717171; }
+
+.dresscode-label{
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
 
 .photo-video{
     position: relative;
@@ -1045,6 +1046,100 @@ input[type=submit]{
     background-color: rgb(196, 197, 191);
 }
 
+#music-onoroff{
+    width: 100%;
+    height: 100%;
+    color: rgb(196, 197, 191);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 140;
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+#music-onoroff.is-hidden{ display: none; }
+
+#music-onoroff>div{
+    background-color: rgb(128, 129, 116);
+    padding: 100px 40px;
+    position: relative;
+}
+
+#music-onoroff>div::before{
+    content: '';
+    position: absolute;
+    border: 1px solid rgba(196, 197, 191,0.5);
+    width: 95%;
+    height: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#music-onoroff a:link, #music-onoroff a:visited{
+    position: relative;
+    display: inline-block;
+    color: rgb(196, 197, 191);
+    border: 1px solid rgb(196, 197, 191);
+    text-decoration: none;
+    padding: 5px 20px;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+#music-onoroff a:link:last-of-type{
+    border: none;
+}
+
+#music-onoroff a:hover, #music-onoroff a:active{
+    color: rgb(128, 129, 116);
+    background-color: rgb(196, 197, 191);
+}
+
+.music-button{
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 110;
+    animation: musicbutton 1.5s;
+}
+
+@keyframes musicbutton{
+    0%{ transform: rotate(-10deg); }
+    20%{ transform: rotate(10deg); }
+    40%{ transform: rotate(-10deg); }
+    60%{ transform: rotate(10deg); }
+    80%{ transform: rotate(-10deg); }
+    100%{ transform: rotate(0); }
+}
+
+.music-off-line{
+    position: absolute;
+    width: 80%;
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    transform: rotate(45deg);
+    transform-origin: top left;
+    top: 20%;
+    left: 25%;
+    transition: 0.5s;
+}
+
+.music-off-line.playmusic{ width: 0; }
+
 footer{
     padding: 30px 0;
     color: rgb(255,255,255);
@@ -1083,8 +1178,8 @@ footer div{ padding: 5px 0; }
 @media screen and (min-width: 800px) {
     #timeline{
         grid-template-areas:
-        'time1 time2 time3 time4 time5'
-        'activity1 activity2 activity3 activity4 activity5';
+        'time1 time2 time3'
+        'activity1 activity2 activity3';
         width: 80%;
     }
     #timeline::before{
@@ -1095,8 +1190,6 @@ footer div{ padding: 5px 0; }
     }
     #time2{ animation-delay: 0.3s; }
     #time3{ animation-delay: 0.6s; }
-    #time4{ animation-delay: 0.9s; }
-    #time5{ animation-delay: 1.2s; }
     .activity{ writing-mode: vertical-lr; align-self: start; }
 }
 
@@ -1126,7 +1219,7 @@ footer div{ padding: 5px 0; }
     #traffic-content{ padding: 20px 24px; letter-spacing: 1px; }
     .guide{ padding-right: 10px; }
 
-    .dresscode-box.active{ width: 85vw; max-width: 300px; }
+    .dresscode-box.active{ width: 90vw; max-width: 320px; }
     .dresscode-note{ letter-spacing: 1px; padding: 0 20px 24px 20px; }
 
     #RSVParea{ max-width: 90vw; }

@@ -10,7 +10,7 @@
 2. 在第一列（Row 1）建立以下欄位標題（順序需與程式碼一致）：
 
    ```
-   提交時間 | 姓名 | Email | 手機 | 出席與否 | 參加人數 | 兒童餐椅 | 素食人數 | 紙本喜帖 | 寄送地址 | 是否開車 | 留言
+   提交時間 | 姓名 | Email | 手機 | 出席與否 | 大人人數 | 小孩人數 | 兒童餐椅 | 素食人數 | 紙本喜帖 | 寄送地址 | 是否開車 | 留言
    ```
 
 ## 步驟二：貼上 Apps Script 程式碼
@@ -38,7 +38,8 @@ function doGet(e) {
       p.EMAIL || '',
       p.PHONE || '',
       p.ATTEND || '',
-      p.ATTENDCOUNT || '',
+      p.ADULTCOUNT || '',
+      p.CHILDCOUNT || '',
       p.CHILDCHAIR || '',
       p.VEGCOUNT || '',
       p.INVITATION || '',
@@ -62,7 +63,7 @@ function doGet(e) {
 
 function sendNotificationEmails(p) {
   var attendLine = p.ATTEND === '出席'
-    ? '出席人數：' + (p.ATTENDCOUNT || '-') + ' 人'
+    ? '出席人數：大人 ' + (p.ADULTCOUNT || '-') + ' 人、小孩 ' + (p.CHILDCOUNT || '0') + ' 人'
     : '無法出席';
 
   var detailLines = [

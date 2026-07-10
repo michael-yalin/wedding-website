@@ -73,6 +73,56 @@ document.addEventListener('click', (e) => {
   if (e.target.id === 'photo-viewer') closeViewer();
 });
 
+/* ---------------- Background music (embedded YouTube) ---------------- */
+const MUSIC_VIDEO_ID = 'jHQv4c7qLjc';
+let musicIframe = null;
+let musicPlaying = false;
+
+function createMusicIframe() {
+  if (musicIframe) return;
+  musicIframe = document.createElement('iframe');
+  musicIframe.id = 'yt-audio-frame';
+  musicIframe.width = '1';
+  musicIframe.height = '1';
+  musicIframe.style.position = 'fixed';
+  musicIframe.style.bottom = '0';
+  musicIframe.style.right = '0';
+  musicIframe.style.opacity = '0';
+  musicIframe.style.pointerEvents = 'none';
+  musicIframe.allow = 'autoplay';
+  musicIframe.src = 'https://www.youtube.com/embed/' + MUSIC_VIDEO_ID +
+    '?autoplay=1&enablejsapi=1&controls=0&loop=1&playlist=' + MUSIC_VIDEO_ID +
+    '&origin=' + encodeURIComponent(window.location.origin);
+  document.body.appendChild(musicIframe);
+}
+
+function ytCommand(func) {
+  if (!musicIframe || !musicIframe.contentWindow) return;
+  musicIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+}
+
+function hideMusicConsent() {
+  document.getElementById('music-onoroff').classList.add('is-hidden');
+}
+
+function toggleMusic() {
+  const offLine = document.getElementById('music-off-line');
+  if (!musicPlaying) {
+    if (musicIframe) {
+      ytCommand('playVideo');
+    } else {
+      createMusicIframe();
+    }
+    musicPlaying = true;
+    offLine.classList.add('playmusic');
+    hideMusicConsent();
+  } else {
+    ytCommand('pauseVideo');
+    musicPlaying = false;
+    offLine.classList.remove('playmusic');
+  }
+}
+
 function JumpTo(id) {
   document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
@@ -127,11 +177,12 @@ function AttendFunction(id) {
     notAttend.forEach((el) => { el.style.display = ''; });
   } else {
     notAttend.forEach((el) => { el.style.display = 'none'; });
-    form['ATTENDCOUNT'].value = '0';
+    form['ADULTCOUNT'].value = '';
+    form['CHILDCOUNT'].value = '0';
     document.getElementById('childchair-no').checked = true;
     form['VEGCOUNT'].value = '0';
     document.getElementById('driving-no').checked = true;
-    clearFieldError('AttendCount');
+    clearFieldError('AdultCount');
   }
 }
 
@@ -167,7 +218,8 @@ function submitform1() {
   const EMAIL = form['EMAIL'].value.trim();
   const PHONE = form['PHONE'].value.trim();
   const ATTEND = form['ATTEND'].value;
-  const ATTENDCOUNT = form['ATTENDCOUNT'].value;
+  const ADULTCOUNT = form['ADULTCOUNT'].value;
+  const CHILDCOUNT = form['CHILDCOUNT'].value;
   const CHILDCHAIR = form['CHILDCHAIR'].value;
   const VEGCOUNT = form['VEGCOUNT'].value;
   const INVITATION = form['INVITATION'].value;
@@ -178,7 +230,7 @@ function submitform1() {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phonePattern = /^[0-9+\-\s]{8,}$/;
 
-  ['Name', 'Email', 'Phone', 'AttendCount', 'Invitation', 'Address'].forEach(clearFieldError);
+  ['Name', 'Email', 'Phone', 'AdultCount', 'Invitation', 'Address'].forEach(clearFieldError);
 
   if (NAME === '') {
     document.getElementById('Name').scrollIntoView({ block: 'center', behavior: 'smooth' });
@@ -195,9 +247,9 @@ function submitform1() {
     setFieldError('Phone', '請輸入有效的手機號碼');
     return;
   }
-  if (ATTEND === '出席' && ATTENDCOUNT === '') {
-    document.getElementById('AttendCount').scrollIntoView({ block: 'center', behavior: 'smooth' });
-    setFieldError('AttendCount', '請選擇參加人數');
+  if (ATTEND === '出席' && ADULTCOUNT === '') {
+    document.getElementById('AdultCount').scrollIntoView({ block: 'center', behavior: 'smooth' });
+    setFieldError('AdultCount', '請選擇參加人數');
     return;
   }
   if (INVITATION === '') {
@@ -227,7 +279,8 @@ function submitform1() {
       EMAIL: EMAIL,
       PHONE: PHONE,
       ATTEND: ATTEND,
-      ATTENDCOUNT: ATTENDCOUNT,
+      ADULTCOUNT: ADULTCOUNT,
+      CHILDCOUNT: CHILDCOUNT,
       CHILDCHAIR: CHILDCHAIR,
       VEGCOUNT: VEGCOUNT,
       INVITATION: INVITATION,
