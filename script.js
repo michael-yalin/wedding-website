@@ -167,7 +167,7 @@ function JumpTo(id) {
 /* ---------------- Scroll reveal (mirrors reference site) ---------------- */
 function reveal() {
   const reveals = document.querySelectorAll(
-    '.countdown-area-box>div,.photo,.dresscode-box,.theplace,.guide,.map-link,.intro-box,.intro-content,.time,.invite h2,.invite p'
+    '.countdown-area-box>div,.photo,.dresscode-box,.theplace,.guide,.map,.intro-box,.intro-content,.time,.invite h2,.invite p'
   );
   const windowHeight = window.innerHeight;
   reveals.forEach((el) => {
