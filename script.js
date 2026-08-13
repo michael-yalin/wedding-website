@@ -7,7 +7,7 @@
 // 詳細部署步驟請見 google-apps-script.md
 const GOOGLE_SHEET_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-const WEDDING_DATE = new Date('Oct 11, 2026 11:00:00');
+const WEDDING_DATE = new Date('Oct 11, 2026 12:00:00');
 
 /* ---------------- Gallery photos ----------------
    Grid = small compressed thumbnails (reference/gallery/thumbs, ~600px).
