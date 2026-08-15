@@ -7,7 +7,9 @@
 // 詳細部署步驟請見 google-apps-script.md
 const GOOGLE_SHEET_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-const WEDDING_DATE = new Date('Oct 11, 2026 12:00:00');
+/* Each page declares the event it counts down to via <body data-event-date="...">
+   so index.html (婚宴) and homecoming.html (歸寧宴) can share this file. */
+const EVENT_DATE = new Date(document.body.dataset.eventDate || 'Oct 11, 2026 12:00:00');
 
 /* ---------------- Gallery photos ----------------
    Grid = small compressed thumbnails (reference/gallery/thumbs, ~600px).
@@ -192,7 +194,8 @@ function revealbg2() {
 window.addEventListener('scroll', revealbg2);
 
 function revealbg3() {
-  const target = document.querySelector('.RSVP');
+  // The homecoming page has no RSVP form, so the last section is the countdown.
+  const target = document.querySelector('.RSVP') || document.querySelector('.countdown-area');
   if (!target) return;
   const windowHeight = window.innerHeight;
   const elementTop = target.getBoundingClientRect().top;
@@ -353,7 +356,7 @@ function submitok() {
 /* ---------------- Countdown ---------------- */
 const countdownTimer = setInterval(function () {
   const now = new Date().getTime();
-  const distance = WEDDING_DATE.getTime() - now;
+  const distance = EVENT_DATE.getTime() - now;
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -367,7 +370,9 @@ const countdownTimer = setInterval(function () {
 
   if (distance < 0) {
     clearInterval(countdownTimer);
-    document.getElementById('countdown-area').innerHTML = "<h2>Wedding Countdown</h2><br>IT'S TIME TO CELEBRATE !";
+    const area = document.getElementById('countdown-area');
+    const heading = area.querySelector('h2').textContent; // "Wedding" / "Homecoming" Countdown
+    area.innerHTML = '<h2>' + heading + "</h2><br>IT'S TIME TO CELEBRATE !";
   }
 }, 1000);
 
