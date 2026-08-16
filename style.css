@@ -323,44 +323,7 @@ header a p{
     transform: translateY(0);
 }
 
-/* ---------- Cross-links between the wedding page and the
-   homecoming-banquet sub-page (index.html <-> homecoming.html) ---------- */
-.page-link:link, .page-link:visited{
-    display: inline-block;
-    width: auto;
-    margin-top: 40px;
-    padding: 10px 24px;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-indent: 3px;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgb(128, 129, 116);
-    background-color: rgb(128, 129, 116);
-    border-radius: 70px;
-    transition: 0.5s;
-}
-
-.page-link:hover, .page-link:active{
-    color: rgb(128, 129, 116);
-    background-color: rgba(245, 242, 235, 0.9);
-}
-
-.footer-page-link:link, .footer-page-link:visited{
-    margin-top: 10px;
-    font-size: 11px;
-    padding: 7px 18px;
-    color: rgba(255, 255, 255, 0.85);
-    border-color: rgba(255, 255, 255, 0.6);
-    background-color: transparent;
-}
-
-.footer-page-link:hover, .footer-page-link:active{
-    color: rgb(128, 129, 116);
-    background-color: rgba(255, 255, 255, 0.85);
-    border-color: rgba(255, 255, 255, 0.85);
-}
-
+/* Sub-heading under the date on the homecoming page's hero */
 .header-sub{
     margin: 0;
     font-size: 12px;
